@@ -1,4 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Anime Application</string>
-    <string name="view">View</string>
+    <string name="app_name">Anime Hub</string>
+    
+    <!-- Navigation -->
+    <string name="details">Details</string>
+    <string name="back">Back</string>
+    
+    <!-- Security Screen -->
+    <string name="security_title">Device Not Secure</string>
+    <string name="security_message">This device appears to be rooted or running on an emulator. For security reasons, some features may be restricted. Do you want to continue?</string>
+    <string name="proceed">Proceed</string>
+    <string name="exit">Exit</string>
+    
+    <!-- Actions -->
+    <string name="retry">Retry</string>
+    
+    <!-- Content -->
+    <string name="synopsis">Synopsis</string>
+    <string name="no_synopsis">No synopsis available.</string>
+    <string name="studios">Studios</string>
+    <string name="empty_list">No anime found</string>
+    
+    <!-- Error Messages -->
+    <string name="error_no_internet">No internet connection. Please check your network.</string>
+    <string name="error_timeout">Request timed out. Please try again.</string>
+    <string name="error_ssl">Secure connection failed. Please try again later.</string>
+    <string name="error_unauthorized">Authentication required. Please login.</string>
+    <string name="error_forbidden">Access denied.</string>
+    <string name="error_not_found">Content not found.</string>
+    <string name="error_server">Server error. Please try again later.</string>
+    <string name="error_parse">Invalid response from server.</string>
+    <string name="error_unknown">Something went wrong. Please try again.</string>
 </resources>

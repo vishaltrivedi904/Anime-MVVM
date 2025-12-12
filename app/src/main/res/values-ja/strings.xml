@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">アニメハブ</string>
+    
+    <string name="details">詳細</string>
+    <string name="back">戻る</string>
+    
+    <string name="security_title">デバイスが安全ではありません</string>
+    <string name="security_message">このデバイスはroot化されているか、エミュレーターで実行されています。セキュリティ上の理由から、一部の機能が制限される場合があります。続行しますか?</string>
+    <string name="proceed">続行</string>
+    <string name="exit">終了</string>
+    
+    <string name="retry">再試行</string>
+    
+    <string name="synopsis">あらすじ</string>
+    <string name="no_synopsis">あらすじはありません。</string>
+    <string name="studios">スタジオ</string>
+    <string name="empty_list">アニメが見つかりません</string>
+    
+    <string name="error_no_internet">インターネット接続がありません。ネットワークを確認してください。</string>
+    <string name="error_timeout">リクエストがタイムアウトしました。もう一度お試しください。</string>
+    <string name="error_ssl">安全な接続に失敗しました。後でもう一度お試しください。</string>
+    <string name="error_unauthorized">認証が必要です。ログインしてください。</string>
+    <string name="error_forbidden">アクセスが拒否されました。</string>
+    <string name="error_not_found">コンテンツが見つかりません。</string>
+    <string name="error_server">サーバーエラー。後でもう一度お試しください。</string>
+    <string name="error_parse">サーバーからの無効な応答。</string>
+    <string name="error_unknown">問題が発生しました。もう一度お試しください。</string>
+</resources>

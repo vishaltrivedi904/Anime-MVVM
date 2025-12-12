@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -17,69 +17,126 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.animeapplication.HiltTestRunner"
+
+        // Security: API configuration via BuildConfig
+        buildConfigField("String", "BASE_URL", "\"https://api.jikan.moe/v4/\"")
+        buildConfigField("String", "API_HOST", "\"api.jikan.moe\"")
+        // Certificate hash for Jikan API (update if certificate rotates)
+        buildConfigField("String", "CERTIFICATE_HASH", "\"sha256/+DiY3wvkCH0VqU4Xxa9x9VxZk2zWKwJM7bo8rNJD2xg=\"")
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+            buildConfigField("Boolean", "ENABLE_LOGGING", "true")
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("Boolean", "ENABLE_LOGGING", "false")
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
+        buildConfig = true
     }
-    kapt {
-        correctErrorTypes = true
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 }
 
 dependencies {
+    // Core Android
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx.v262)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    // Jetpack Compose
-    implementation(libs.ui)
-    implementation(libs.material3)
+    // Compose BOM
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.animation)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Navigation
     implementation(libs.androidx.navigation.compose)
 
-    // Retrofit
-    implementation(libs.logging.interceptor)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-
-    // Coil for image loading
-    implementation(libs.coil.compose)
-
-    // ExoPlayer for video playback
-    implementation(libs.androidx.media3.exoplayer)
-
-    // Hilt for Dependency Injection
-
-    implementation(libs.androidx.media3.ui)
-
-    // Hilt for Dependency Injection
+    // Hilt DI
     implementation(libs.hilt.android)
-    implementation(libs.androidx.paging.common.android)
-    implementation(libs.androidx.paging.compose.android)
-    implementation(libs.androidx.runtime.livedata)
-    kapt(libs.dagger.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    // Network
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.gson)
 
-    // Testing
+    // Room Database
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+    ksp(libs.androidx.room.compiler)
+
+    // Media
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
+    // Security
+    implementation(libs.androidx.security.crypto)
+    implementation(libs.androidx.datastore.preferences)
+
+    // Unit Testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.okhttp.mockwebserver)
+    testImplementation(libs.androidx.room.testing)
+
+    // Android Testing
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.android.compiler)
 }

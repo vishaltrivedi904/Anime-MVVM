@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.AnimeApplication" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Base theme for launch screen -->
+    <style name="Theme.AnimeApplication.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.AnimeApplication</item>
+    </style>
+    
+    <!-- Main app theme -->
+    <style name="Theme.AnimeApplication" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/splash_background</item>
+        <item name="android:navigationBarColor">@color/splash_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

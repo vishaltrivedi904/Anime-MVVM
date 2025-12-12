@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">एनीमे हब</string>
+    
+    <string name="details">विवरण</string>
+    <string name="back">वापस</string>
+    
+    <string name="security_title">डिवाइस सुरक्षित नहीं है</string>
+    <string name="security_message">यह डिवाइस रूटेड या एमुलेटर पर चल रहा है। सुरक्षा कारणों से, कुछ सुविधाएँ प्रतिबंधित हो सकती हैं। क्या आप जारी रखना चाहते हैं?</string>
+    <string name="proceed">आगे बढ़ें</string>
+    <string name="exit">बाहर निकलें</string>
+    
+    <string name="retry">पुनः प्रयास करें</string>
+    
+    <string name="synopsis">सारांश</string>
+    <string name="no_synopsis">कोई सारांश उपलब्ध नहीं है।</string>
+    <string name="studios">स्टूडियो</string>
+    <string name="empty_list">कोई एनीमे नहीं मिला</string>
+    
+    <string name="error_no_internet">इंटरनेट कनेक्शन नहीं है। कृपया अपना नेटवर्क जांचें।</string>
+    <string name="error_timeout">अनुरोध समय समाप्त। कृपया पुनः प्रयास करें।</string>
+    <string name="error_ssl">सुरक्षित कनेक्शन विफल। कृपया बाद में पुनः प्रयास करें।</string>
+    <string name="error_unauthorized">प्रमाणीकरण आवश्यक है। कृपया लॉगिन करें।</string>
+    <string name="error_forbidden">पहुंच अस्वीकृत।</string>
+    <string name="error_not_found">सामग्री नहीं मिली।</string>
+    <string name="error_server">सर्वर त्रुटि। कृपया बाद में पुनः प्रयास करें।</string>
+    <string name="error_parse">सर्वर से अमान्य प्रतिक्रिया।</string>
+    <string name="error_unknown">कुछ गलत हो गया। कृपया पुनः प्रयास करें।</string>
+</resources>
