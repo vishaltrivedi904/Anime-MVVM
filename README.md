@@ -1,6 +1,8 @@
 # Anime Hub 🎬
 
-A modern, production-ready Android application for browsing top anime using the Jikan API. Built with Clean Architecture, Jetpack Compose, and comprehensive security features.
+A modern Android application for browsing top anime using the Jikan API. Built with Clean Architecture, Jetpack Compose, and security best practices.
+
+> **Educational Project** - This project is for learning and educational purposes only.
 
 ## Screenshots
 
@@ -39,13 +41,13 @@ This project follows **Clean Architecture** with three distinct layers:
 
 ## Features
 
-- 📱 **Browse Top Anime** - Infinite scroll with Paging 3
-- 🎬 **Watch Trailers** - In-app trailer player
-- 📖 **Detailed Info** - Synopsis, genres, studios, ratings
-- 💾 **Offline Support** - Room database caching
-- 🌍 **Localization** - English, Hindi, Japanese
-- 🎨 **Dynamic Theming** - Material 3 with light/dark mode
-- 🔒 **Security Hardened** - SSL pinning, encrypted storage
+- 📱 Browse Top Anime with infinite scroll
+- 🎬 Watch Trailers in-app
+- 📖 Detailed Info with synopsis, genres, studios
+- 💾 Offline Support via Room caching
+- 🌍 Multi-language (English, Hindi, Japanese)
+- 🎨 Light/Dark Theme toggle
+- 🔒 Security features (SSL pinning, encrypted storage)
 
 ## Tech Stack
 
@@ -55,69 +57,22 @@ This project follows **Clean Architecture** with three distinct layers:
 | UI | Jetpack Compose, Material 3 |
 | Architecture | Clean Architecture, MVVM |
 | DI | Hilt |
-| Networking | Retrofit, OkHttp, Gson |
+| Networking | Retrofit, OkHttp |
 | Database | Room |
 | Pagination | Paging 3 |
 | Images | Coil |
 | Navigation | Navigation Compose |
-| Security | EncryptedSharedPreferences, CertificatePinner |
-| Testing | JUnit, MockK, Turbine |
-
-## Security Features
-
-| Feature | Implementation |
-|---------|----------------|
-| SSL Pinning | Real SHA-256 hash from api.jikan.moe |
-| HTTPS Only | Cleartext traffic disabled |
-| Root Detection | Checks for su binaries |
-| Emulator Detection | Build fingerprint analysis |
-| Encrypted Storage | EncryptedSharedPreferences |
-| Code Obfuscation | ProGuard/R8 enabled |
 
 ## API
 
 Uses [Jikan API v4](https://docs.api.jikan.moe/) - Unofficial MyAnimeList API.
 
-**Endpoints used:**
-- `GET /top/anime` - Top anime list
-- `GET /anime/{id}` - Anime details
-
 ## How to Run
 
 ```bash
-# Clone the repository
 git clone https://github.com/yourusername/anime-hub.git
 cd anime-hub
-
-# Build and install
 ./gradlew installDebug
-```
-
-## Generate SSL Pin Hash
-
-To update the SSL certificate hash:
-
-```bash
-# Extract public key
-openssl s_client -connect api.jikan.moe:443 -servername api.jikan.moe </dev/null \
-| openssl x509 -pubkey -noout > public_key.pem
-
-# Generate SHA-256 hash
-openssl pkey -in public_key.pem -pubin -outform der \
-| openssl dgst -sha256 -binary \
-| openssl enc -base64
-```
-
-Current hash: `sha256/Sb8dCtDxF3fMIdaM+UeXIdTiKHZvztzF2jjszZEcQd4=`
-
-## Testing
-
-```bash
-# Run unit tests
-./gradlew test
-
-# Run instrumented tests
-./gradlew connectedAndroidTest
 ```
 
 ## Project Structure
@@ -125,13 +80,14 @@ Current hash: `sha256/Sb8dCtDxF3fMIdaM+UeXIdTiKHZvztzF2jjszZEcQd4=`
 ```
 app/src/main/java/.../
 ├── core/
-│   ├── network/        # NetworkErrorHandler
-│   └── security/       # SecurityManager, SecureStorage
+│   ├── network/        # Error handling
+│   ├── security/       # Security utilities
+│   └── settings/       # Theme & language
 ├── data/
-│   ├── local/          # Room database, DAO
+│   ├── local/          # Room database
 │   ├── model/          # DTOs
 │   ├── remote/         # Retrofit API
-│   └── repository/     # Repository implementation
+│   └── repository/     # Repository impl
 ├── di/                 # Hilt modules
 ├── domain/
 │   ├── model/          # Domain models
@@ -147,23 +103,10 @@ app/src/main/java/.../
 
 ## Requirements
 
-- Android Studio Hedgehog or later
+- Android Studio Hedgehog+
 - JDK 17
-- Min SDK 24
-- Target SDK 35
-
-## License
-
-MIT License
+- Min SDK 24, Target SDK 35
 
 ---
 
-## Contact
-
-- **GitHub:** [yourusername](https://github.com/yourusername)
-- **LinkedIn:** [yourname](https://linkedin.com/in/yourname)
-- **Email:** your.email@example.com
-
----
-
-Made with ❤️ for learning and professional development.
+*For educational and learning purposes only.*
