@@ -18,13 +18,25 @@ import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun TrailerPlayer(url: String) {
+fun TrailerPlayer(
+    url: String,
+    onError: () -> Unit = {}
+) {
     val context = LocalContext.current
     val webView = remember {
         WebView(context).apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
-            webViewClient = WebViewClient()
+            webViewClient = object : WebViewClient() {
+                override fun onReceivedError(
+                    view: WebView?,
+                    errorCode: Int,
+                    description: String?,
+                    failingUrl: String?
+                ) {
+                    onError()
+                }
+            }
         }
     }
 

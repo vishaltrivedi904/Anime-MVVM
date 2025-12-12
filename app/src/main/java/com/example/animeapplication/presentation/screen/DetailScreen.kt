@@ -26,6 +26,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -92,14 +95,20 @@ fun DetailScreen(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun DetailContent(anime: AnimeDetail) {
+    var trailerFailed by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        if (anime.hasTrailer) {
-            TrailerPlayer(url = anime.trailerUrl!!)
+        // Show trailer if available and not failed, otherwise show poster
+        if (anime.hasTrailer && !trailerFailed) {
+            TrailerPlayer(
+                url = anime.trailerUrl!!,
+                onError = { trailerFailed = true }
+            )
         } else {
             PosterBanner(imageUrl = anime.imageUrl)
         }

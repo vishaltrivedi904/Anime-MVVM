@@ -4,11 +4,16 @@
     
     <string name="details">詳細</string>
     <string name="back">戻る</string>
+    <string name="settings">設定</string>
     
     <string name="security_title">デバイスが安全ではありません</string>
     <string name="security_message">このデバイスはroot化されているか、エミュレーターで実行されています。セキュリティ上の理由から、一部の機能が制限される場合があります。続行しますか?</string>
     <string name="proceed">続行</string>
     <string name="exit">終了</string>
+    
+    <string name="dark_theme">ダークテーマ</string>
+    <string name="theme_description">ダーク/ライトテーマを切り替え</string>
+    <string name="language">言語</string>
     
     <string name="retry">再試行</string>
     
@@ -16,6 +21,7 @@
     <string name="no_synopsis">あらすじはありません。</string>
     <string name="studios">スタジオ</string>
     <string name="empty_list">アニメが見つかりません</string>
+    <string name="trailer_unavailable">トレーラーは利用できません</string>
     
     <string name="error_no_internet">インターネット接続がありません。ネットワークを確認してください。</string>
     <string name="error_timeout">リクエストがタイムアウトしました。もう一度お試しください。</string>

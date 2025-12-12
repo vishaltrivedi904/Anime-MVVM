@@ -5,12 +5,18 @@
     <!-- Navigation -->
     <string name="details">Details</string>
     <string name="back">Back</string>
+    <string name="settings">Settings</string>
     
     <!-- Security Screen -->
     <string name="security_title">Device Not Secure</string>
     <string name="security_message">This device appears to be rooted or running on an emulator. For security reasons, some features may be restricted. Do you want to continue?</string>
     <string name="proceed">Proceed</string>
     <string name="exit">Exit</string>
+    
+    <!-- Settings -->
+    <string name="dark_theme">Dark Theme</string>
+    <string name="theme_description">Toggle dark/light appearance</string>
+    <string name="language">Language</string>
     
     <!-- Actions -->
     <string name="retry">Retry</string>
@@ -20,6 +26,7 @@
     <string name="no_synopsis">No synopsis available.</string>
     <string name="studios">Studios</string>
     <string name="empty_list">No anime found</string>
+    <string name="trailer_unavailable">Trailer not available</string>
     
     <!-- Error Messages -->
     <string name="error_no_internet">No internet connection. Please check your network.</string>
