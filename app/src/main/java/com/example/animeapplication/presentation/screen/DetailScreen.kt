@@ -1,6 +1,7 @@
 package com.example.animeapplication.presentation.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,12 +9,17 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,17 +37,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
 import com.example.animeapplication.R
 import com.example.animeapplication.domain.model.AnimeDetail
 import com.example.animeapplication.domain.model.Result
 import com.example.animeapplication.presentation.components.ErrorView
 import com.example.animeapplication.presentation.components.TrailerPlayer
-import com.example.animeapplication.presentation.components.PosterBanner
 import com.example.animeapplication.presentation.viewmodel.DetailViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,7 +104,7 @@ fun DetailScreen(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun DetailContent(anime: AnimeDetail) {
-    var trailerFailed by remember { mutableStateOf(false) }
+    var showTrailer by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -103,14 +112,46 @@ private fun DetailContent(anime: AnimeDetail) {
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        // Show trailer if available and not failed, otherwise show poster
-        if (anime.hasTrailer && !trailerFailed) {
-            TrailerPlayer(
-                url = anime.trailerUrl!!,
-                onError = { trailerFailed = true }
-            )
+        // Always show poster banner with play overlay if trailer available
+        if (showTrailer && anime.hasTrailer) {
+            TrailerPlayer(url = anime.trailerUrl!!)
         } else {
-            PosterBanner(imageUrl = anime.imageUrl)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .then(
+                        if (anime.hasTrailer) Modifier.clickable { showTrailer = true }
+                        else Modifier
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                AsyncImage(
+                    model = anime.imageUrl,
+                    contentDescription = anime.title,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+
+                // Play icon overlay if trailer available
+                if (anime.hasTrailer) {
+                    Box(
+                        modifier = Modifier
+                            .size(64.dp)
+                            .clip(CircleShape)
+                            .background(Color.Black.copy(alpha = 0.7f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.PlayArrow,
+                            contentDescription = stringResource(R.string.play_trailer),
+                            modifier = Modifier.size(40.dp),
+                            tint = Color.White
+                        )
+                    }
+                }
+            }
         }
 
         Spacer(Modifier.height(16.dp))

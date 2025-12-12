@@ -27,6 +27,7 @@
     <string name="studios">Studios</string>
     <string name="empty_list">No anime found</string>
     <string name="trailer_unavailable">Trailer not available</string>
+    <string name="play_trailer">Play trailer</string>
     
     <!-- Error Messages -->
     <string name="error_no_internet">No internet connection. Please check your network.</string>
